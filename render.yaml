@@ -1,13 +1,16 @@
 # Render Blueprint for the Node.js API.
-# Create a new "Blueprint" service in Render pointing at this repo/folder,
-# then fill in the environment variables marked sync:false in the dashboard.
+# In Render: New + -> Blueprint -> connect this repo. Render reads this file,
+# creates the service, then prompts you to fill in the variables marked
+# "sync: false" in the dashboard.
 services:
   - type: web
     name: password-reset-api
-    env: node
+    runtime: node
+    plan: free
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
+    healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
